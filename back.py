@@ -156,10 +156,6 @@ class Request(BaseHTTPRequestHandler):
             responseBody = "completed"
         elif path == "/test":
             log("Testing")
-<<<<<<< HEAD
-            #call("+44")
-=======
->>>>>>> 75451eb303790e9bc17b54c1a7c86eec1238fff0
             responseBody = "Test completed"
             
         self.wfile.write(responseBody.encode("utf-8"))
