@@ -60,7 +60,7 @@ def play(file):
 def call(number):
     client = TwilioClient(account_sid, auth_token)
     call = client.calls.create(
-                        url='http://demo.twilio.com/docs/voice.xml',
+                        twiml='<Response><Say>Hi there, a seat is now available, hurry up!</Say></Response>',
                         to=number,
                         from_=source_phone_number
                     )
@@ -179,7 +179,9 @@ class Request(BaseHTTPRequestHandler):
                 log("content: " + query.get("content")[0])
             responseBody = "completed"
         elif path == "/test":
+            #call("+44")
             responseBody = "Test completed"
+            
         self.wfile.write(responseBody.encode("utf-8"))
         log("respond to frontend")
     def log_message(self, format, *args):
