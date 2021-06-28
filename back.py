@@ -97,7 +97,11 @@ class Request(BaseHTTPRequestHandler):
         if path == "/startPlay":
             log("event: start playing sound")
             if (query.get("reason")):
+                reason = query.get("reason")[0];
                 log("reason: " + query.get("reason")[0])
+                if (reason == "Seat available."):
+                    call("+447774863377")
+
             if (query.get("count")):
                 log("count: " + query.get("count")[0])
             if (query.get("file")):
