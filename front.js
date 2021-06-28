@@ -508,8 +508,47 @@ async function main() {
         }, 60000);
     }
 
-    log(path);
 
+
+    if (!error && path == "register") {
+
+         setTimeout(function() {
+             log("3"+path);
+            document.getElementsByClassName("cb-btn-yellow")[0].click();
+        }, 4000);
+
+    }
+
+    if (!error && path == "register") {
+        setTimeout(function() {
+          if (document.getElementsByClassName("card-text")[1].innerText == "You’re On Your Way!") {
+              // await new Promise(r => setTimeout(r, 6000));
+               document.getElementsByClassName("cb-btn-yellow")[1].click();
+              log("4"+path);
+
+          }
+        }, 8000);
+    }
+
+    if (!error && path == "register") {
+        setTimeout(function() {
+          if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
+              // await new Promise(r => setTimeout(r, 6000));
+              var element = document.getElementById("terms-desc");
+              element.scrollTop = element.scrollHeight - element.clientHeight;
+              log("5"+path);
+          }
+        }, 10000);
+
+        setTimeout(function() {
+          if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
+              log("Check to agree the terms and go to the next step.");
+              document.getElementById("terms-acceptance-checkbox").click();
+              document.getElementById("forward-btn").click();
+              log("6"+path);
+          }
+        }, 12000);
+    }
     if (!error && path == "submitChangeRegistration.action") {
         if (document.getElementsByClassName("s2-h2").length > 0) {
             switch (document.getElementsByClassName("s2-h2")[0].innerText) {
