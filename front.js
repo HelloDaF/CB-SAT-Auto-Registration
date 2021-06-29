@@ -515,20 +515,25 @@ async function main() {
     if (!error && path == "register") {
 
          setTimeout(function() {
-             log("3"+path);
-            document.getElementsByClassName("cb-btn-yellow")[1].click();
-        }, 4000);
+
+             if(document.getElementsByClassName("cb-btn-yellow")[1].innerText == "Get Started") {
+                  log("3"+path);
+                  document.getElementsByClassName("cb-btn-yellow")[1].click();
+             }
+
+
+        }, 10000);
 
         setTimeout(function() {
              log("3"+path);
             document.getElementById("graddate-save-button").click();
             document.getElementById("grade-save-button").click();
-        }, 8000);
+        }, 13000);
 
          setTimeout(function() {
              log("3"+path);
             document.getElementsByClassName("cb-btn-yellow")[0].click();
-        }, 9000);
+        }, 14000);
 
     }
 
@@ -540,7 +545,7 @@ async function main() {
               log("4"+path);
 
           }
-        }, 12000);
+        }, 16000);
 
         setTimeout(function() {
           if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
@@ -549,7 +554,7 @@ async function main() {
               element.scrollTop = element.scrollHeight - element.clientHeight;
               log("5"+path);
           }
-        }, 14000);
+        }, 18000);
 
         setTimeout(function() {
           if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
@@ -559,7 +564,7 @@ async function main() {
               log("6"+path);
 
           }
-        }, 16000);
+        }, 20000);
 
          setTimeout(function() {
           if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
@@ -568,7 +573,7 @@ async function main() {
               log("7"+path);
 
           }
-        }, 18000);
+        }, 23000);
 
         setTimeout(function() {
           if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
@@ -579,7 +584,7 @@ async function main() {
              // document.getElementsByClassName("stepper-btn-forward")[0].click()
 
           }
-        }, 20000);
+        }, 25000);
 
          setTimeout(function() {
           if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
@@ -589,7 +594,7 @@ async function main() {
               document.getElementsByClassName("stepper-btn-forward")[0].click()
 
           }
-        }, 22000);
+        }, 27000);
         setTimeout(function() {
             if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
               log("Step 3 : Test Date.");
@@ -597,7 +602,7 @@ async function main() {
              // document.getElementById("test-center-date-button-OCT-2").click();
               log("8"+path);
           }
-        }, 24000);
+        }, 29000);
 
         setTimeout(function() {
             if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
@@ -606,7 +611,7 @@ async function main() {
                 document.getElementById("testdate-continue-button").click();
               log("8.5"+path);
           }
-        }, 26000);
+        }, 32000);
 
         setTimeout(function() {
             if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
@@ -614,7 +619,27 @@ async function main() {
               document.getElementById("test-center-search-option").click();
               log("9"+path);
           }
-        }, 28000);
+        }, 34000);
+
+        setTimeout(function() {
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 4 : Test Center.");
+              document.getElementsByTagName("option")[132].selected = true; //Macao
+              document.getElementById("international-tc-search").value = "MO";
+              document.getElementById("international-tc-search").options[132].selected = true;
+              document.getElementsByTagName("span")[43].innerText = "Macao";
+              log("9.5"+path);
+          }
+        }, 36000);
+
+        setTimeout(function() {
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 4 : Test Center.");
+              document.getElementsByTagName("button")[7].click();
+              log("9.5"+path);
+          }
+        }, 38000);
+
     }
 
      /*
