@@ -462,11 +462,11 @@ async function main() {
 
     document.addEventListener("mousemove", terminatePlay);
     document.addEventListener("touchstart", terminatePlay);
-
+/*
     if (!GM_getValue("cbsatar-agreeTerms", false)) {
         error = true;
     }
-
+*/
     if (!error && document.getElementsByTagName("h1").length != 0 && url != "https://nsat.collegeboard.org/satweb/registration/acceptSatTermsAndConditions.action") {
         if (document.getElementsByTagName("h1")[0].innerText == "Service Unavailable - Zero size object" || document.getElementsByTagName("h1")[0].innerText == "Access Denied") {
             error = true;
@@ -502,35 +502,46 @@ async function main() {
        // openSettingsLi2.children[0].addEventListener("click", startSettings);
        // document.getElementsByClassName("cb-mobile-navigation")[0].children[1].children[0].children[0].appendChild(openSettingsLi2);
         }, 6000);
-    } else {
+    }
+    /*
+    else {
         setTimeout(function() {
-            handleError("idle detected");
+           // handleError("idle detected");
         }, 60000);
     }
-
+*/
 
 
     if (!error && path == "register") {
 
          setTimeout(function() {
              log("3"+path);
-            document.getElementsByClassName("cb-btn-yellow")[0].click();
+            document.getElementsByClassName("cb-btn-yellow")[1].click();
         }, 4000);
+
+        setTimeout(function() {
+             log("3"+path);
+            document.getElementById("graddate-save-button").click();
+            document.getElementById("grade-save-button").click();
+        }, 8000);
+
+         setTimeout(function() {
+             log("3"+path);
+            document.getElementsByClassName("cb-btn-yellow")[0].click();
+        }, 9000);
 
     }
 
     if (!error && path == "register") {
-        setTimeout(function() {
+         setTimeout(function() {
           if (document.getElementsByClassName("card-text")[1].innerText == "You’re On Your Way!") {
               // await new Promise(r => setTimeout(r, 6000));
                document.getElementsByClassName("cb-btn-yellow")[1].click();
               log("4"+path);
 
           }
-        }, 8000);
-    }
+        }, 12000);
 
-    if (!error && path == "register") {
         setTimeout(function() {
           if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
               // await new Promise(r => setTimeout(r, 6000));
@@ -538,7 +549,7 @@ async function main() {
               element.scrollTop = element.scrollHeight - element.clientHeight;
               log("5"+path);
           }
-        }, 10000);
+        }, 14000);
 
         setTimeout(function() {
           if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
@@ -546,9 +557,67 @@ async function main() {
               document.getElementById("terms-acceptance-checkbox").click();
               document.getElementById("forward-btn").click();
               log("6"+path);
+
           }
-        }, 12000);
+        }, 16000);
+
+         setTimeout(function() {
+          if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
+              log("Set outside US test center.");
+              document.getElementsByName("tc-search-region")[1].checked = true;
+              log("7"+path);
+
+          }
+        }, 18000);
+
+        setTimeout(function() {
+          if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 1 : Testing Country or Region.");
+              //document.getElementsByName("tc-search-region")[1].checked = true;
+              document.getElementsByClassName("cb-font-weight-xs-regular")[1].click();
+              log("7"+path);
+             // document.getElementsByClassName("stepper-btn-forward")[0].click()
+
+          }
+        }, 20000);
+
+         setTimeout(function() {
+          if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 1 : Testing Country or Region.");
+             // document.getElementsByName("tc-search-region")[1].checked = true;
+              log("7.5"+path);
+              document.getElementsByClassName("stepper-btn-forward")[0].click()
+
+          }
+        }, 22000);
+        setTimeout(function() {
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 3 : Test Date.");
+              document.getElementById("test-center-date-button-AUG-28").click();
+             // document.getElementById("test-center-date-button-OCT-2").click();
+              log("8"+path);
+          }
+        }, 24000);
+
+        setTimeout(function() {
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 3 : Test Date.");
+              //document.getElementsByClassName("stepper-btn-forward")[2].click()
+                document.getElementById("testdate-continue-button").click();
+              log("8.5"+path);
+          }
+        }, 26000);
+
+        setTimeout(function() {
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+              log("Step 4 : Test Center.");
+              document.getElementById("test-center-search-option").click();
+              log("9"+path);
+          }
+        }, 28000);
     }
+
+     /*
     if (!error && path == "submitChangeRegistration.action") {
         if (document.getElementsByClassName("s2-h2").length > 0) {
             switch (document.getElementsByClassName("s2-h2")[0].innerText) {
@@ -562,7 +631,7 @@ async function main() {
         }
     }
 
-    if (!error) switch (path) {
+   if (!error) switch (path) {
         case "login":
             if (GM_getValue("cbsatar-login", false)) {
                 log("Login.");
@@ -844,6 +913,7 @@ async function main() {
             }
             break;
     }
+    */
 }
 
 async function handleError(e) {
