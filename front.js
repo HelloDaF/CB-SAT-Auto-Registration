@@ -503,20 +503,21 @@ async function main() {
        // document.getElementsByClassName("cb-mobile-navigation")[0].children[1].children[0].children[0].appendChild(openSettingsLi2);
         }, 6000);
     }
-    /*
     else {
         setTimeout(function() {
-           // handleError("idle detected");
+            //handleError("idle detected");
+             location.reload();
         }, 60000);
     }
-*/
+
 
 
     if (!error && path == "register") {
 
          setTimeout(function() {
 
-             if(document.getElementsByClassName("cb-btn-yellow")[1].innerText == "Get Started") {
+             if(document.getElementsByTagName("h1")[1].innerText == "Enter Your Information" &&
+                document.getElementsByClassName("cb-btn-yellow")[1].innerText == "Get Started") {
                   log("3"+path);
                   document.getElementsByClassName("cb-btn-yellow")[1].click();
              }
@@ -526,14 +527,13 @@ async function main() {
 
         setTimeout(function() {
              log("3"+path);
-            document.getElementById("graddate-save-button").click();
-            document.getElementById("grade-save-button").click();
-        }, 13000);
+            if(document.getElementsByTagName("h3")[1].innerText =="Student Information") {
+                document.getElementById("graddate-save-button").click();
+                document.getElementById("grade-save-button").click();
+                document.getElementsByClassName("cb-btn-yellow")[0].click(); // jump to test date/center tab directly
+            }
 
-         setTimeout(function() {
-             log("3"+path);
-            document.getElementsByClassName("cb-btn-yellow")[0].click();
-        }, 14000);
+        }, 13000);
 
     }
 
@@ -567,11 +567,9 @@ async function main() {
         }, 20000);
 
          setTimeout(function() {
-          if (document.getElementsByTagName("h1")[2].innerText == "Terms and Conditions") {
+          if (document.getElementsByTagName("h1")[2].innerText == "Select Date and Test Center") {
               log("Set outside US test center.");
               document.getElementsByName("tc-search-region")[1].checked = true;
-              log("7"+path);
-
           }
         }, 23000);
 
@@ -580,47 +578,160 @@ async function main() {
               log("Step 1 : Testing Country or Region.");
               //document.getElementsByName("tc-search-region")[1].checked = true;
               document.getElementsByClassName("cb-font-weight-xs-regular")[1].click();
-              log("7"+path);
              // document.getElementsByClassName("stepper-btn-forward")[0].click()
-
           }
         }, 25000);
 
-         setTimeout(function() {
+        setTimeout(function() {
           if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
               log("Step 1 : Testing Country or Region.");
              // document.getElementsByName("tc-search-region")[1].checked = true;
-              log("7.5"+path);
               document.getElementsByClassName("stepper-btn-forward")[0].click()
-
           }
         }, 27000);
-        setTimeout(function() {
-            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
-              log("Step 3 : Test Date.");
-              document.getElementById("test-center-date-button-AUG-28").click();
-             // document.getElementById("test-center-date-button-OCT-2").click();
-              log("8"+path);
-          }
+
+       let seatAvailable = false;
+
+       setTimeout(function() {
+          //document.getElementById("test-center-date-button-AUG-28").click();
+          document.getElementById("test-center-date-button-OCT-2").click();
         }, 29000);
 
         setTimeout(function() {
-            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
-              log("Step 3 : Test Date.");
-              //document.getElementsByClassName("stepper-btn-forward")[2].click()
-                document.getElementById("testdate-continue-button").click();
-              log("8.5"+path);
-          }
-        }, 32000);
+          log("Step 3 : Test Date.");
+          //document.getElementsByClassName("stepper-btn-forward")[2].click()
+          document.getElementById("testdate-continue-button").click();
+
+        }, 31000);
 
         setTimeout(function() {
-            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
-              log("Step 4 : Test Center.");
-              document.getElementById("test-center-search-option").click();
-              log("9"+path);
-          }
-        }, 34000);
 
+            log("Step 4 : Test Center.");
+            document.getElementById("test-center-search-option").click();
+
+            /*   document.getElementsByTagName("option")[132].selected = true; //Macao
+                        document.getElementById("international-tc-search").value = "MO";
+                        document.getElementById("international-tc-search").options[132].selected = true;
+                        document.getElementsByTagName("span")[43].innerText = "Macao";
+                     */
+
+        }, 35000);
+
+        setTimeout(function() {
+            document.getElementsByTagName("button")[7].click();
+/*
+            for(let buttonIndex = 0; buttonIndex < document.getElementsByTagName("button").length; buttonIndex++){
+                log("qiiq: "+ document.getElementsByTagName("button")[buttonIndex].innerText );
+                if(document.getElementsByTagName("button")[buttonIndex].innerText == "Find a Test Center") {
+                    document.getElementsByTagName("button")[buttonIndex].click();
+                    break;
+                }
+            }
+           */
+
+        }, 37000);
+
+        setTimeout(function() {
+
+            for (let i = 1; i < document.getElementsByTagName("tr").length; i++) {
+                log("QIQIQI");
+                if (document.getElementsByTagName("tr")[i].children[0].innerText.search("Seat is Available") != -1) {
+                    document.getElementsByTagName("tr")[i].children[0].getElementsByTagName("button")[0].click();
+                    document.getElementById("testcenter-continue-button").click(); //reserve first
+                    seatAvailable = true;
+                    notify("Seat available.", true, false, true, true);
+                }else {
+                    log("QIQI : " + i);
+                }
+
+            }
+
+        }, 40000);
+/*
+         setTimeout(function() {
+
+
+          document.getElementById("test-center-date-button-OCT-2").click();
+
+                        log("Step 3 : Test Date.");
+                        //document.getElementsByClassName("stepper-btn-forward")[2].click()
+                        document.getElementById("testdate-continue-button").click();
+                        log("Step 4 : Test Center.");
+
+
+                    document.getElementsByTagName("button")[7].click();
+
+
+                        for (let i = 1; i < document.getElementsByTagName("tr").length; i++) {
+
+                            if (document.getElementsByTagName("tr")[i].children[0].innerText.search("Seat is Available") != -1) {
+                                document.getElementsByTagName("tr")[i].children[0].getElementsByTagName("button")[0].click();
+                                document.getElementById("testcenter-continue-button").click(); //reserve first
+                                seatAvailable = true;
+                                //await notify("Seat available.", true, false, true, true);
+                            }else {
+                               log("QIQI : " + i);
+                            }
+
+                        }
+
+
+
+
+        }, 33000);
+
+            if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
+                let tryDate = ['test-center-date-button-AUG-28', 'test-center-date-button-OCT-2', 'test-center-date-button-DEC-4'];
+                for(let dateIndex = 0; dateIndex < 3; dateIndex++) {
+                    log("QIQI " + tryDate[dateIndex]);
+                    document.getElementById(tryDate[dateIndex]).click();
+                    if (dateIndex == 0) {
+                        log("Step 3 : Test Date.");
+                        //document.getElementsByClassName("stepper-btn-forward")[2].click()
+                        document.getElementById("testdate-continue-button").click();
+                        log("Step 4 : Test Center.");
+                        document.getElementById("test-center-search-option").click();
+                        document.getElementsByTagName("option")[132].selected = true; //Macao
+                        document.getElementById("international-tc-search").value = "MO";
+                        document.getElementById("international-tc-search").options[132].selected = true;
+                        document.getElementsByTagName("span")[43].innerText = "Macao";
+                        await new Promise(r => setTimeout(r, 3000));
+                    }
+
+                    document.getElementsByTagName("button")[7].click();
+                    await new Promise(r => setTimeout(r, 1000));
+                    if (document.getElementsByTagName("tr").length > 1) {
+                        for (let i = 1; i < document.getElementsByTagName("tr").length; i++) {
+
+                            if (document.getElementsByTagName("tr")[i].children[0].innerText.search("Seat is Available") != -1) {
+                                document.getElementsByTagName("tr")[i].children[0].getElementsByTagName("button")[0].click();
+                                document.getElementById("testcenter-continue-button").click(); //reserve first
+                                seatAvailable = true;
+                                //await notify("Seat available.", true, false, true, true);
+                            }else {
+                               log("QIQI " + dateIndex + ": " + i);
+                            }
+
+                        }
+
+                    }
+
+                }
+*/
+
+        setTimeout(function() {
+        if(!seatAvailable) {
+            log("No seat available, retry");
+            location.reload();
+        }
+          }, 45000);
+
+
+
+
+    }
+
+/*
         setTimeout(function() {
             if (document.getElementsByTagName("h1")[1].innerText == "Select Date and Test Center") {
               log("Step 4 : Test Center.");
@@ -637,10 +748,15 @@ async function main() {
               log("Step 4 : Test Center.");
               document.getElementsByTagName("button")[7].click();
               log("9.5"+path);
+
+
           }
         }, 38000);
 
-    }
+        //await new Promise(r => setTimeout(r, 6000));
+
+*/
+
 
      /*
     if (!error && path == "submitChangeRegistration.action") {
