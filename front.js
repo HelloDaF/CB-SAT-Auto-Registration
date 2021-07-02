@@ -550,7 +550,7 @@ async function main() {
     {
         log("Login page");
         await wait(5000);
-        document.getElementById("password").click();
+
         document.getElementById("rememberMe").click();
         document.getElementsByTagName("button")[0].click();
     }
@@ -568,7 +568,7 @@ async function main() {
 
     // REGISTER
     if (!error && path == "register") {
-        await wait(6000);
+        await wait(8000);
         if(document.getElementsByTagName("h1")[1].innerText == "Enter Your Information" &&
             document.getElementsByClassName("cb-btn-yellow")[1].innerText == "Get Started")
         {
@@ -587,6 +587,12 @@ async function main() {
         }
 
         await wait(3000);
+        if (document.getElementsByTagName("h1")[1].innerText == "Enter Your Information")
+        {
+            document.getElementsByClassName("cb-btn-yellow")[0].click(); // jump to test date/center tab directly
+        }
+
+        await wait(5000);
         log("Register step 3 - You're On Your Way!");
         if (document.getElementsByClassName("card-text")[1].innerText == "You’re On Your Way!")
         {
