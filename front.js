@@ -464,14 +464,14 @@ async function checkAvailibility()
 {
     let seatAvailable = false;
     await wait(5000);
-    let sleepGap = 30000;
-    let refreshBudget = 20;
+    let sleepGap = 15000;
+    let refreshBudget = 30;
     while(!seatAvailable && refreshBudget > 0 )
     {
         log("Check Availability Step 1: Select Date");
         //document.getElementById("test-center-date-button-AUG-28").click();
-        //document.getElementById("test-center-date-button-OCT-2").click();
-        document.getElementById("test-center-date-button-DEC-4").click();
+        document.getElementById("test-center-date-button-OCT-2").click();
+        //document.getElementById("test-center-date-button-DEC-4").click();
         await wait(2000);
         log("Check Availability Step 2: Test Date continue.");
         document.getElementById("testdate-continue-button").click();
@@ -482,12 +482,13 @@ async function checkAvailibility()
         await wait(2000);
         log("Check Availability Step 4: Test Center continue.");
         document.getElementsByTagName("button")[7].click();
-        await wait(2000);
+        await wait(1000);
         log("Check Availability Step 5: Test Center Select.");
         for (let i = 1; i < document.getElementsByTagName("tr").length; i++) {
             if (document.getElementsByTagName("tr")[i].children[0].innerText.search("Seat is Available") != -1) {
                 document.getElementsByTagName("tr")[i].children[0].getElementsByTagName("button")[0].click();
                 document.getElementById("testcenter-continue-button").click(); //reserve first
+                document.getElementById("continue-confirm-test-selection-btn").click(); //reserve for 20mins
                 seatAvailable = true;
                 break;
             }
@@ -501,7 +502,6 @@ async function checkAvailibility()
     if (seatAvailable)
     {
         log("Notifying! Seat Available!");
-        document.getElementById("continue-confirm-test-selection-btn").click(); //reserve for 20mins
         callMe("Seat available.");
     }
     else
@@ -555,6 +555,14 @@ async function main() {
         document.getElementsByTagName("button")[0].click();
     }
 
+    // Authenticate User Login
+    if (url == "https://account.collegeboard.org/login/authenticateUser")
+    {
+        log("Authenticate User Login Page");
+        await wait(5000);
+        document.getElementsByClassName("_2B5cHEcGX9NUrROfLuw97V")[0].click();
+    }
+
     // HOME
     if (url == "https://mysat.collegeboard.org/dashboard")
     {
@@ -568,7 +576,7 @@ async function main() {
 
     // REGISTER
     if (!error && path == "register") {
-        await wait(8000);
+        await wait(15000);
         if(document.getElementsByTagName("h1")[1].innerText == "Enter Your Information" &&
             document.getElementsByClassName("cb-btn-yellow")[1].innerText == "Get Started")
         {
