@@ -11,6 +11,7 @@
 // @match        https://pps.collegeboard.org/*
 // @match        https://mysat.collegeboard.org/*
 // @match        https://satreg.collegeboard.org/*
+// @match        https://www.collegeboard.org/*
 // @name         College Board SAT Auto Registration
 // @namespace    https://github.com/TURX/CB-SAT-Auto-Registration
 // @run-at       document-idle
@@ -560,7 +561,24 @@ async function main() {
     {
         log("Authenticate User Login Page");
         await wait(5000);
+
+        document.getElementsByName("person.password")[0].value = "Irisbzy.20040124";
+
+        if(document.getElementsByClassName("_1TsJ58PU4H46u4U322YSds")[0].innerText == "Verify Password.") {
+          document.getElementsByName("verifyPassword")[0].disabled = false;
+          document.getElementsByName("verifyPassword")[0].click();
+        }else {
+
         document.getElementsByClassName("_2B5cHEcGX9NUrROfLuw97V")[0].click();
+        document.getElementsByClassName("_2B5cHEcGX9NUrROfLuw97V")[0].click(); //double click
+
+        }
+     
+    }
+
+    if(url=="https://www.collegeboard.org/"){
+       await wait(3000);
+       document.getElementsByName("st-mysat")[0].click();
     }
 
     // HOME
